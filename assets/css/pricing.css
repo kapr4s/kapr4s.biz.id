@@ -1,0 +1,315 @@
+/* Pricing: segmented tabs, package cards, notes and the closing call to action. */
+
+.pricing {
+  border-top: 1px solid var(--color-border);
+}
+
+/* ---------- Tabs (segmented control) ---------- */
+
+.pricing__tabs {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: var(--space-6);
+  padding: 3px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  box-shadow: var(--shadow-sm);
+}
+
+.pricing__tabs[hidden] {
+  display: none;
+}
+
+.pricing__tab {
+  flex: 1 1 auto;
+  min-height: 2.75rem;
+  padding: 0 var(--space-5);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--navy-soft);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.pricing__tab:hover {
+  color: var(--navy);
+}
+
+.pricing__tab[aria-selected="true"] {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* ---------- Panels ---------- */
+
+/* A link to #personal/#bisnis/#enterprise scrolls to the panel; leave room
+   above it so the tab row stays visible below the sticky header. */
+.pricing__panel {
+  scroll-margin-top: calc(var(--header-h) + var(--space-6) + 3.5rem);
+}
+
+.pricing__panel + .pricing__panel {
+  margin-top: var(--space-8); /* only matters without JS, when every panel shows */
+}
+
+.has-js .pricing__panel + .pricing__panel {
+  margin-top: 0;
+}
+
+.pricing__panel:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 6px;
+  border-radius: var(--radius-sm);
+}
+
+.pricing__panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.pricing__tier {
+  font-size: var(--step-2);
+}
+
+.pricing__sub {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Package cards ---------- */
+
+.plans {
+  display: grid;
+  gap: var(--space-5);
+  padding: 0;
+  list-style: none;
+}
+
+/* Card colour follows its position in every tab: teal, orange, violet */
+.plan:nth-child(1) { --tier-color: var(--teal-deep); }
+.plan:nth-child(2) { --tier-color: var(--orange-deep); }
+.plan:nth-child(3) { --tier-color: var(--violet-deep); }
+
+/* Layered card: colour head, a navy price band, then the paper body. */
+.plan {
+    position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.plan:hover {
+  transform: translateY(-3px);
+  box-shadow: 6px 6px 0 var(--navy);
+}
+
+.plan__head {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
+  background: var(--tier-color, var(--navy));
+  color: #fff;
+}
+
+/* Price band: left-aligned like the rest of the card. A small first row holds
+   "mulai dari" and the struck price; the big figure sits below it. */
+.plan__price {
+  display: flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  background: var(--navy);
+  color: #fff;
+}
+
+.plan__figure {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem var(--space-3);
+}
+
+.plan__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5) var(--space-5);
+}
+
+.plan__name {
+  font-size: var(--step-1);
+}
+
+.plan__desc {
+  color: #fff;
+  font-size: var(--step--1);
+}
+
+/* Struck-through normal price, shown above the current one */
+.plan__was {
+  order: 2;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--coral);
+  text-decoration-thickness: 2px;
+  white-space: nowrap;
+}
+
+.plan__from {
+  order: 1;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--color-on-dark-muted);
+  white-space: nowrap;
+}
+
+.plan__amount {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  flex-basis: 100%;
+  order: 3;
+}
+
+.plan__per {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: #fff;
+  margin-left: 0.15rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.plan__features {
+  display: grid;
+  gap: var(--space-2);
+  padding: 0;
+  list-style: none;
+  font-size: var(--step--1);
+}
+
+.plan__features li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.plan__features li::before {
+  content: "✓";
+  content: "✓" / "";
+  position: absolute;
+  left: 0;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--tier-color, var(--blue));
+}
+
+.plan__cta {
+  margin-top: auto;
+  width: 100%;
+}
+
+/* ---------- Notes under the cards ---------- */
+
+.pricing__after {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-7);
+}
+
+.pricing__note {
+  max-width: 62ch;
+  font-size: var(--step--1);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Closing block: shown under every tab ---------- */
+
+.pricing__closing {
+  display: grid;
+  gap: var(--space-5);
+  align-items: center;
+  margin-top: var(--space-7);
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  background: var(--navy);
+  color: var(--color-on-dark);
+  box-shadow: 8px 8px 0 var(--orange);
+}
+
+.pricing__closing-title {
+  font-size: var(--step-3);
+  letter-spacing: -0.02em;
+  color: var(--cream);
+}
+
+.pricing__closing p {
+  margin-top: var(--space-3);
+  max-width: 60ch;
+  color: var(--color-on-dark-muted);
+}
+
+.pricing__closing .btn {
+  justify-self: start;
+}
+
+.pricing__closing :focus-visible {
+  outline-color: var(--cream);
+}
+
+@media (min-width: 60rem) {
+  .plans {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Heads, price bands and bodies line up across the row */
+  @supports (grid-template-rows: subgrid) {
+    .plan {
+      display: grid;
+      grid-row: span 3;
+      grid-template-rows: subgrid;
+      row-gap: 0;
+    }
+  }
+
+  .pricing__closing {
+    grid-template-columns: 1fr auto;
+    padding: var(--space-7);
+  }
+
+  .pricing__closing .btn {
+    justify-self: end;
+  }
+}
+
+/* Narrow phones: tabs share the width evenly */
+@media (max-width: 30rem) {
+  .pricing__tabs {
+    width: 100%;
+  }
+
+  .pricing__tab {
+    padding: 0 var(--space-3);
+    font-size: var(--step--1);
+  }
+}

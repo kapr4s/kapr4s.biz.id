@@ -1,0 +1,212 @@
+/* Contact section + form, and the button variants used on coloured backgrounds. */
+
+.btn--light {
+  background: var(--cream);
+  color: var(--navy);
+}
+
+.btn--light:hover {
+  background: var(--navy);
+  color: var(--cream);
+}
+
+.btn--wa {
+  width: 100%;
+  background: var(--wa-green);
+  color: #fff;
+}
+
+.btn--wa:hover {
+  background: var(--wa-green-deep);
+  color: #fff;
+}
+
+.btn--wa svg,
+.hero__cta .btn--primary svg {
+  fill: currentColor;
+}
+
+/* ---------- Contact ---------- */
+
+.contact {
+  position: relative;
+  padding-block: var(--space-9);
+  background: var(--blue);
+  color: #fff;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Oversized "4" watermark from the logo */
+.contact::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -4%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(60vw, 34rem);
+  aspect-ratio: 482 / 562;
+  background: url("../img/logo.svg") center / contain no-repeat;
+  filter: brightness(0) invert(1);
+  opacity: 0.07;
+}
+
+.contact__grid {
+  display: grid;
+  gap: var(--space-7);
+}
+
+.contact .eyebrow {
+  color: #fff;
+}
+
+.contact__title {
+  margin-top: var(--space-3);
+  font-size: var(--step-5);
+  letter-spacing: -0.04em;
+}
+
+.contact__intro > p {
+  max-width: 30rem;
+  margin-top: var(--space-4);
+  font-size: var(--step-1);
+  color: #fff;
+}
+
+.contact__alt {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding: 0;
+  list-style: none;
+}
+
+.contact__alt li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.contact__alt svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+.contact__alt a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration-thickness: 1px;
+}
+
+.contact__alt a:hover {
+  color: var(--cream);
+}
+
+.contact :focus-visible {
+  outline-color: var(--cream);
+}
+
+/* ---------- Form ---------- */
+
+.contact-form {
+  display: grid;
+  gap: var(--space-4);
+  padding: clamp(1.25rem, 1rem + 2vw, 2rem);
+  border-radius: var(--radius-lg);
+  background: var(--cream);
+  color: var(--navy);
+  box-shadow: 12px 12px 0 var(--navy);
+}
+
+.contact-form :focus-visible {
+  outline-color: var(--blue);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.field label {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 2.875rem;
+  padding: var(--space-3) var(--space-4);
+  border: 1.5px solid var(--navy-soft);
+  border-radius: var(--radius-md);
+  background: var(--paper);
+  font-size: 1rem; /* 16px avoids iOS zoom on focus */
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+.field input:hover,
+.field select:hover,
+.field textarea:hover {
+  border-color: var(--navy);
+}
+
+.field ::placeholder {
+  color: var(--navy-soft);
+  opacity: 1;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--blue);
+}
+
+.field [aria-invalid="true"] {
+  border-color: var(--error-border);
+}
+
+.field__error {
+  min-height: 0;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--error);
+}
+
+/* Keep the live region rendered (not display:none) so screen readers announce new errors */
+.field__error:empty {
+  height: 0;
+  margin-top: calc(-1 * var(--space-2));
+}
+
+.contact-form__helper {
+  font-size: var(--step--1);
+  color: var(--navy-soft);
+}
+
+.contact-form__success {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--success-bg);
+  color: var(--success-text);
+  font-weight: 600;
+  font-size: var(--step--1);
+}
+
+@media (min-width: 60rem) {
+  .contact__grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--space-8);
+    align-items: start;
+  }
+}

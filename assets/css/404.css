@@ -1,0 +1,41 @@
+/* Styles for 404.html only. */
+
+.nf {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: var(--space-4);
+  min-height: 100vh;
+  padding-block: var(--space-8);
+}
+
+.nf__four {
+  width: 4.5rem;
+}
+
+.nf__code {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--navy-deep);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+}
+
+.nf__err {
+  color: var(--mint);
+}
+
+.nf__title {
+  font-size: var(--step-5);
+  letter-spacing: -0.04em;
+}
+
+.nf__text {
+  max-width: 34rem;
+  color: var(--color-text-muted);
+}
+
+.nf .btn {
+  margin-top: var(--space-3);
+}

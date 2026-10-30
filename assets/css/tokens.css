@@ -1,0 +1,131 @@
+/*
+ * Design tokens: the single source of truth for colour, type, spacing and motion.
+ * Change a value here and it updates everywhere on the site.
+ *
+ * Two font families on purpose: Inter for headings and reading, and mono for
+ * the "technical" terminal/code layer that is part of the brand.
+ */
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+:root {
+  /* Brand palette (taken from the "4" logo + navy) */
+  --cream: #f2eee5;
+  --cream-deep: #e8e2d4;
+  --paper: #faf8f3;
+  --navy: #0f1b3d;
+  --navy-deep: #0a1229;
+  --navy-soft: #3a4566;
+  --blue: #404eff;
+  --blue-deep: #2f3be0;
+  --blue-tint: #e3e5ff;
+  --mint: #7cf2c4;
+  --sky: #9fb3ff;
+  /* Warm accent: the peach already used for numbers in the code card,
+     plus a soft tint for section backgrounds and a deep tone for text (5.3:1 on cream) */
+  --amber: #ffb86b;
+  --amber-tint: #ffe9d1;
+  --amber-deep: #9a4a00;
+  --mint-deep: #1f9e6e; /* decorative borders only, not text */
+  --wa-green: #15803d; /* WhatsApp-like green, darkened for 5:1 contrast with white */
+  --wa-green-deep: #116b35;
+  --error: #b3202a;
+  --error-border: #c4262e;
+  --success-bg: #dff5e8;
+  --success-text: #11532d;
+  /* Category accents: "bright" for dots, lines and decoration; "deep" for
+     solid blocks behind white text (all deep tones >= 4.5:1 with white) */
+  --orange: #f26b1d;
+  --orange-deep: #c2510f;
+  --violet: #7b5cff;
+  --violet-deep: #6343f0;
+  --teal: #0fa98a;
+  --teal-deep: #0b7f68;
+  --coral: #ef4a45;
+  --coral-deep: #c9302c;
+  /* "ink" tones: same hues, dark enough for small text on cream/paper */
+  --coral-tint: #fde6e4;
+  --orange-ink: #a8460d;
+  --teal-ink: #0a6e5a;
+  --code-bg: #070d1f;
+  --code-comment: #7d88aa;
+  --code-number: #ffb86b;
+
+  /* Semantic roles */
+  --color-bg: var(--cream);
+  --color-surface: var(--paper);
+  --color-text: var(--navy);
+  --color-text-muted: var(--navy-soft);
+  --color-accent: var(--blue);
+  --color-accent-hover: var(--blue-deep);
+  --color-border: rgb(15 27 61 / 0.14);
+  --color-focus: var(--blue);
+  --color-on-dark: var(--cream);
+  --color-on-dark-muted: #b9c0d6;
+
+  /* Typography */
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Fluid type scale: min at ~360px wide, max at ~1280px wide */
+  --step--1: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --step-1: clamp(1.125rem, 1.07rem + 0.3vw, 1.3125rem);
+  --step-2: clamp(1.375rem, 1.25rem + 0.6vw, 1.75rem);
+  --step-3: clamp(1.75rem, 1.5rem + 1.2vw, 2.625rem);
+  --step-4: clamp(2.25rem, 1.75rem + 2.4vw, 4rem);
+  --step-5: clamp(2.75rem, 1.9rem + 4.2vw, 6rem);
+
+  /* Spacing (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: clamp(3.5rem, 2.75rem + 3.5vw, 6rem);
+
+  /* Layout */
+  --container: 72rem;
+  --gutter: clamp(1rem, 0.6rem + 2vw, 2rem);
+  --header-h: 4rem;
+
+  /* Shape */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-pill: 999px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgb(15 27 61 / 0.06);
+  --shadow-md: 0 8px 24px -8px rgb(15 27 61 / 0.18);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 600ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+  }
+}

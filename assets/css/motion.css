@@ -1,0 +1,82 @@
+/* Motion layer: spring transitions, staggered
+   entrances (custom index delay), hover/tap scale and layout-like tab moves.
+   Everything is off under prefers-reduced-motion. */
+:root {
+  /* Spring curve (stiffness ~130, light bounce) approximated with linear() */
+  --spring: linear(0, 0.18 6%, 0.6 15%, 0.94 25%, 1.06 33%, 1.08 38%, 1.03 50%, 0.99 62%, 1);
+  --spring-dur: 650ms;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* initial -> animate on load: hero pieces rise in one after another */
+  .m-enter {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+    animation: m-in var(--spring-dur) var(--spring) forwards;
+    animation-delay: calc(var(--i, 0) * 110ms + 80ms);
+  }
+
+  @keyframes m-in {
+    to { opacity: 1; transform: none; }
+  }
+
+  /* whileInView with custom index: children of a list stagger in */
+  .m-stagger > * {
+    opacity: 0;
+    transform: translate(-28px, 28px);
+    transition:
+      opacity 500ms ease-out,
+      transform var(--spring-dur) var(--spring);
+    transition-delay: calc(var(--i, 0) * 120ms);
+  }
+
+  .m-stagger.is-in > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* whileHover / whileTap */
+  .btn,
+  .pricing__tab,
+  .plan__cta {
+    transition: transform 380ms var(--spring), background-color 150ms, color 150ms;
+  }
+
+  .btn:hover { transform: scale(1.04); }
+  .btn:active, .pricing__tab:active { transform: scale(0.94); }
+
+  .plan, .svc, .point, .fact, .problem {
+    transition: transform 420ms var(--spring), box-shadow 300ms ease-out;
+  }
+
+  .plan:hover, .svc:hover, .point:hover, .fact:hover, .problem:hover {
+    transform: translateY(-6px) scale(1.015);
+  }
+
+  .plan:active, .svc:active, .point:active { transform: scale(0.985); }
+
+  /* Keyframes array: the big "4" breathes like the scale/rotate demo */
+  .hero__visual svg, .hero__visual > img:first-child {
+    animation: m-breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes m-breathe {
+    0%, 100% { transform: scale(1) rotate(0); }
+    50% { transform: scale(1.03) rotate(-1.5deg); }
+  }
+
+  /* Tab panel swap: new cards spring in like AnimatePresence */
+  .pricing__panel:not([hidden]) .plan {
+    animation: m-in var(--spring-dur) var(--spring) both;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+
+  /* Pointer tilt on the portrait (drag-like follow) */
+  .m-tilt {
+    transition: transform 500ms var(--spring);
+    transform: perspective(900px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg));
+  }
+
+  /* Lists use the stagger above instead of the plain fade reveal */
+  .js-reveal .m-stagger[data-reveal] { opacity: 1; transform: none; }
+}

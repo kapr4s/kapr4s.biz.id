@@ -1,0 +1,167 @@
+/* Skills marquee: two rows of tech logos scrolling in opposite directions. Pure CSS. */
+
+.marquee {
+  --marquee-gap: var(--space-6);
+  --marquee-speed: 55s;
+
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-3);
+  padding-block: var(--space-5);
+  border-block: 1px solid var(--color-border);
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.marquee__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: min(100% - 2 * var(--gutter), var(--container));
+  margin-inline: auto;
+}
+
+.marquee__label {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--navy-soft);
+}
+
+.marquee__row {
+  display: flex;
+  gap: var(--marquee-gap);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee__track {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--marquee-gap);
+  min-width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: marquee-scroll var(--marquee-speed) linear infinite;
+}
+
+.marquee__row--reverse .marquee__track {
+  animation-direction: reverse;
+  animation-duration: calc(var(--marquee-speed) * 1.15);
+}
+
+/* WCAG 2.2.2: the button pauses everything (touch + keyboard). Hovering a row also
+   pauses it, but only on devices with a real pointer, because touch screens keep
+   :hover "stuck" after a tap. */
+.marquee.is-paused .marquee__track {
+  animation-play-state: paused;
+}
+
+@media (hover: hover) {
+  .marquee__row:hover .marquee__track {
+    animation-play-state: paused;
+  }
+}
+
+/* Compact pause/play pill. Drawn at 24px to sit on the label's line,
+   with an invisible ::after that enlarges the touch target to 32px (WCAG 2.5.8). */
+.marquee__toggle {
+  position: relative;
+  display: none;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  height: 1.5rem;
+  padding: 0 0.625rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  background: transparent;
+  color: var(--navy-soft);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.marquee__toggle::after {
+  content: "";
+  position: absolute;
+  inset: -0.25rem;
+  border-radius: var(--radius-pill);
+}
+
+.marquee__toggle:hover {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+
+.has-js .marquee__toggle {
+  display: inline-flex;
+}
+
+.marquee__toggle svg {
+  width: 0.5625rem;
+  height: 0.5625rem;
+}
+
+.marquee__toggle[aria-pressed="true"] {
+  background: var(--navy);
+  color: var(--cream);
+}
+
+.marquee__track li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--navy);
+}
+
+.marquee__track svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--marquee-gap)));
+  }
+}
+
+/* No motion: show a static, wrapped list instead of a scrolling one */
+@media (prefers-reduced-motion: reduce) {
+  .marquee__row {
+    -webkit-mask-image: none;
+    mask-image: none;
+    width: min(100% - 2 * var(--gutter), var(--container));
+    margin-inline: auto;
+  }
+
+  .marquee__track {
+    flex: 1 1 100%;
+    min-width: 0;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-5);
+    animation: none;
+  }
+
+  .marquee__track[aria-hidden="true"],
+  .has-js .marquee__toggle {
+    display: none;
+  }
+}

@@ -1,0 +1,73 @@
+/* Theme layer: Inter headings, soft shadows, rounded cards and the
+   colour roles below. */
+:root {
+  /* Original kapr4s palette, assigned to UUPM roles:
+     primary = logo blue, secondary = violet, accent = teal,
+     background = cream, foreground = navy. */
+  --cream: #f2eee5;
+  --cream-deep: #e8e2d4;
+  --paper: #faf8f3;
+  --navy: #0f1b3d;
+  --navy-deep: #0a1229;
+  --navy-soft: #3a4566;
+  --blue: #404eff;
+  --blue-deep: #2f3be0;
+  --blue-tint: #e3e5ff;
+  --violet: #7b5cff;
+  --violet-deep: #6343f0;
+  --teal: #0fa98a;
+  --teal-deep: #0b7f68;
+  --teal-ink: #0a6e5a;
+  --orange: #404eff;
+  --orange-deep: #2f3be0;
+  --orange-ink: #2f3be0;
+  --amber-tint: #dff5ef;
+  --color-border: rgb(15 27 61 / 0.14);
+  --color-focus: #404eff;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --shadow-soft: 0 12px 32px -12px rgb(15 27 61 / 0.3);
+}
+
+h1, h2, h3, h4 { letter-spacing: -0.025em; }
+
+a, button, [role="tab"], summary { cursor: pointer; }
+
+.plan:hover, .svc:hover, .point:hover { box-shadow: var(--shadow-soft); }
+.pricing__closing, .faq__cta, .contact-form { box-shadow: var(--shadow-soft); }
+
+.plan, .svc, .point, .fact { border-radius: 1rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .plan:hover, .svc:hover, .point:hover { transform: none; }
+}
+
+/* ---------- Colour rhythm without orange ----------
+   Orange now maps to blue, so cycles that used it are re-ordered to keep
+   neighbours distinct. Palette in use: navy, blue, violet, teal, coral. */
+.step:nth-child(3) .step__num { color: var(--teal-deep); }
+.step:nth-child(3) { border-top-color: var(--teal); }
+.step:nth-child(4) .step__num { color: var(--navy); }
+.step:nth-child(4) { border-top-color: var(--navy); }
+
+.point:nth-child(2) { --point-color: var(--violet-deep); }
+.point:nth-child(3) { --point-color: var(--teal-deep); }
+.point:nth-child(4) { --point-color: var(--navy); }
+.point:nth-child(5) { --point-color: var(--coral-deep); }
+.point:nth-child(6) { --point-color: var(--blue); }
+
+.faq-item:nth-child(5n + 2) { --faq-color: var(--violet-deep); }
+.faq-item:nth-child(5n + 3) { --faq-color: var(--teal-ink); }
+.faq-item:nth-child(5n + 4) { --faq-color: var(--coral-deep); }
+.faq-item:nth-child(5n + 5) { --faq-color: var(--navy); }
+
+.svc--site { --svc-color: var(--blue); }
+.svc--app { --svc-color: var(--violet-deep); }
+.svc--ai { --svc-color: var(--teal-deep); }
+.svc--auto { --svc-color: var(--navy); }
+.svc--maint { --svc-color: var(--blue-deep); }
+.svc--custom { --svc-color: var(--coral-deep); }
+
+/* Footer strip: exactly the five colours used on the page */
+.site-footer {
+  border-image: linear-gradient(90deg, var(--navy) 0 20%, var(--blue) 20% 40%, var(--violet) 40% 60%, var(--teal) 60% 80%, var(--coral) 80% 100%) 1;
+}

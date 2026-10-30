@@ -1,0 +1,313 @@
+/* Services bento grid: colour-head cards, website mock, human-in-the-loop flow. */
+
+.services {
+  border-top: 1px solid var(--color-border);
+}
+
+.svc-grid {
+  display: grid;
+  gap: var(--space-4);
+  padding: 0;
+  list-style: none;
+}
+
+/* Each card: a solid colour head (white text) over a paper body.
+   The colour comes from --svc-color, set per service below. */
+.svc {
+  --svc-color: var(--navy);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.svc:hover {
+  transform: translateY(-3px);
+  box-shadow: 6px 6px 0 var(--navy);
+}
+
+.svc--site { --svc-color: var(--orange-deep); }
+.svc--app { --svc-color: var(--blue); }
+.svc--ai { --svc-color: var(--violet-deep); }
+.svc--auto { --svc-color: var(--teal-deep); }
+.svc--maint { --svc-color: var(--navy); }
+.svc--custom { --svc-color: var(--coral-deep); }
+
+.svc__head {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--svc-color);
+  color: #fff;
+}
+
+.svc__head :focus-visible {
+  outline-color: #fff;
+}
+
+.svc__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+}
+
+.svc__num {
+  justify-self: end;
+  margin-bottom: calc(var(--space-3) * -1);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.svc__title {
+  font-size: var(--step-2);
+}
+
+.svc__desc {
+  color: #fff;
+}
+
+.svc__benefits {
+  display: grid;
+  gap: var(--space-2);
+  padding: 0;
+  list-style: none;
+  font-size: var(--step--1);
+}
+
+.svc__benefits li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+/* Coloured dot per service, like a tag marker */
+.svc__benefits li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--svc-color);
+}
+
+/* 001: browser mock that shows what a client site looks like */
+.mock {
+  order: 99;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.mock__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--cream-deep);
+}
+
+.mock__bar .terminal__dots i {
+  width: 0.55rem;
+  height: 0.55rem;
+}
+
+.mock__url {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  color: var(--navy-soft);
+}
+
+.mock__url svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  color: var(--wa-green);
+}
+
+.mock__body {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+
+.mock__line {
+  height: 0.55rem;
+  width: 70%;
+  border-radius: var(--radius-pill);
+  background: rgb(15 27 61 / 0.12);
+}
+
+.mock__line--lg {
+  height: 1rem;
+  width: 85%;
+  background: var(--navy);
+}
+
+.mock__line--sm {
+  width: 45%;
+}
+
+.mock__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: fit-content;
+  margin-top: var(--space-2);
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background: var(--wa-green);
+  color: #fff;
+  font-weight: 600;
+}
+
+.mock__cta svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  fill: currentColor;
+}
+
+.mock__checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px dashed var(--color-border);
+  list-style: none;
+  color: var(--navy-soft);
+}
+
+.mock__checks li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.mock__checks svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  color: var(--wa-green);
+}
+
+@media (min-width: 64rem) {
+  .svc--site .svc__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .svc--site .mock {
+    order: 0;
+  }
+}
+
+/* 004: human-in-the-loop flow, drawn on the teal head */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-block: var(--space-2);
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+
+.flow li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.flow li:not(:last-child)::after {
+  content: "→";
+  content: "→" / "";
+  color: rgb(255 255 255 / 0.8);
+}
+
+.flow__step {
+  padding: 0.3rem 0.65rem;
+  border: 1px solid rgb(255 255 255 / 0.4);
+  border-radius: var(--radius-sm);
+}
+
+.flow__human .flow__step {
+  border-color: #fff;
+  background: #fff;
+  color: var(--teal-deep);
+  font-weight: 700;
+}
+
+.flow__human svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  color: #fff;
+}
+
+/* 006: custom card leads to the contact form */
+.svc--custom .btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+@media (min-width: 40rem) {
+  .svc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .svc--wide {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 64rem) {
+  .svc-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Six cards on three columns: the accent card fills the last row */
+  .svc--custom {
+    grid-column: span 2;
+  }
+}
+
+/* Window dots used by the browser mock */
+.terminal__dots {
+  display: inline-flex;
+  gap: 0.4rem;
+}
+
+.terminal__dots i {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+
+.terminal__dots i:nth-child(2) {
+  background: #febc2e;
+}
+
+.terminal__dots i:nth-child(3) {
+  background: #28c840;
+}
