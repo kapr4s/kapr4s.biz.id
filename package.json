@@ -1,0 +1,28 @@
+{
+  "name": "kapr4s.biz.id",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio and services site of kapr4s at kapr4s.biz.id. Zero-dependency static HTML/CSS/JS, deployed to GitHub Pages.",
+  "homepage": "https://kapr4s.biz.id",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kapr4s/kapr4s.biz.id.git"
+  },
+  "author": "Krisna Adji Prasetyo (https://github.com/kapr4s)",
+  "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "serve": "node tests/serve.js 4173",
+    "build": "bash scripts/build-site.sh _site",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "node --test \"tests/unit/*.test.js\"",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.64.1"
+  }
+}

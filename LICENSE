@@ -1,0 +1,15 @@
+Copyright (c) 2026 Krisna Adji Prasetyo (kapr4s). All rights reserved.
+
+The source code, text, images, logo and other content in this repository are
+published for reference and portfolio purposes only. No permission is granted
+to copy, modify, redistribute or reuse any part of it, in whole or in part,
+without prior written consent from the copyright holder.
+
+Third-party components keep their own licenses:
+
+- Fonts (Inter, JetBrains Mono): SIL Open Font License 1.1.
+  See assets/fonts/LICENSE.txt.
+- Technology logos (Simple Icons): CC0 1.0. Brand names and logos are
+  trademarks of their respective owners. See assets/img/ICONS-LICENSE.txt.
+- Development dependencies (Playwright, axe-core) are installed from npm under
+  their own licenses and are not distributed with the website.
