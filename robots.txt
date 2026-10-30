@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kapr4s.biz.id/sitemap.xml
